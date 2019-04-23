@@ -1,4 +1,4 @@
-package com.swacorp.dotcom.separationOfConcerns.solution;
+package com.swacorp.dotcom.removingTamps.solution;
 
 public class Rental {
 

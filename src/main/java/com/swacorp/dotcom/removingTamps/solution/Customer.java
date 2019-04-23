@@ -1,4 +1,4 @@
-package com.swacorp.dotcom.separationOfConcerns.toDo;
+package com.swacorp.dotcom.removingTamps.solution;
 
 import java.util.Enumeration;
 import java.util.Vector;
@@ -9,7 +9,7 @@ import java.util.Vector;
 public class Customer {
 
     private String name;
-    private Vector rentals = new Vector();
+    private Vector<Rental> rentals = new Vector();
 
     public Customer (String name){
         this.name = name;
@@ -23,26 +23,21 @@ public class Customer {
         return name;
     }
 
-    //There are mixed features on the same method figure out which?
     //Avoid casting as you can change it by generics
     public String statement() {
 
         double totalAmount = 0;
         int frequentRenterPoints = 0;
-        Enumeration enumRentals = rentals.elements();
+
+        Enumeration<Rental> enumRentals = rentals.elements();
+
         String result = "Rental Record for " + getName() + "\n";
 
         while (enumRentals.hasMoreElements()) {
 
-            Rental rental = (Rental) enumRentals.nextElement();
+            Rental rental = enumRentals.nextElement();
 
-            //Add frequent renter points
-            frequentRenterPoints ++;
-
-            //Add bonus for a two day new release rental
-            if ((rental.getMovie().getPriceCode() == Movie.NEW_RELEASE) && rental.getDaysRented() > 1) {
-                frequentRenterPoints++;
-            }
+            frequentRenterPoints += rental.getFrequentRenterPoints();
 
             //Show figures for this rental
             result += rental.getMovie().getTitle() + "\t" + "\n";
@@ -55,5 +50,8 @@ public class Customer {
         result += "You earned " + String.valueOf(frequentRenterPoints) + " frequent renter points";
         return result;
     }
+
+
+
 
 }
