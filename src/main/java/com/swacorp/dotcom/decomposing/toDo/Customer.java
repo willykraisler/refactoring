@@ -20,6 +20,7 @@ public class Customer {
         return name;
     }
 
+    //TODO extract price logic
     public String statement() {
 
         double totalAmount = 0;
@@ -67,5 +68,11 @@ public class Customer {
         result += "Amount owed is " + String.valueOf(totalAmount) + "\n";
         result += "You earned " + String.valueOf(frequentRenterPoints) + " frequent renter points";
         return result;
+    }
+
+    public static void main(String[] args) {
+        Customer customer = new Customer("Pancho");
+        customer.addRental(new Rental(new Movie("Avenger", 1),4 ));
+        System.out.println(customer.statement());
     }
 }

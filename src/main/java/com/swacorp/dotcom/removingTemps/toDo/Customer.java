@@ -1,4 +1,4 @@
-package com.swacorp.dotcom.movingCalculation.solution;
+package com.swacorp.dotcom.removingTemps.toDo;
 
 import java.util.Enumeration;
 import java.util.Vector;
@@ -9,7 +9,7 @@ import java.util.Vector;
 public class Customer {
 
     private String name;
-    private Vector rentals = new Vector();
+    private Vector<Rental> rentals = new Vector();
 
     public Customer (String name){
         this.name = name;
@@ -23,24 +23,23 @@ public class Customer {
         return name;
     }
 
+    //TODO Replace totalAmount and frequentRentalPoints with query methods
+    // Both the ASCII and HTML versions require these totals.
+    // Improve concise of enumRentals.nextElement()
     public String statement() {
 
         double totalAmount = 0;
         int frequentRenterPoints = 0;
-        Enumeration enumRentals = rentals.elements();
+
+        Enumeration<Rental> enumRentals = rentals.elements();
+
         String result = "Rental Record for " + getName() + "\n";
 
         while (enumRentals.hasMoreElements()) {
 
-            Rental rental = (Rental) enumRentals.nextElement();
+            Rental rental = enumRentals.nextElement();
 
-            //Add frequent renter points
-            frequentRenterPoints ++;
-
-            //Add bonus for a two day new release rental
-            if ((rental.getMovie().getPriceCode() == Movie.NEW_RELEASE) && rental.getDaysRented() > 1) {
-                frequentRenterPoints++;
-            }
+            frequentRenterPoints += rental.getFrequentRenterPoints();
 
             //Show figures for this rental
             result += rental.getMovie().getTitle() + "\t" + "\n";

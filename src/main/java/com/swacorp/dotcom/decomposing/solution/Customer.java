@@ -79,4 +79,10 @@ public class Customer {
         }
         return thisAmount;
     }
+
+    public static void main(String[] args) {
+        Customer customer = new Customer("Pancho");
+        customer.addRental(new Rental(new Movie("Avenger", 1),4 ));
+        System.out.println(customer.statement());
+    }
 }

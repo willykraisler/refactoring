@@ -68,4 +68,10 @@ public class Customer {
         result += "You earned " + String.valueOf(frequentRenterPoints) + " frequent renter points";
         return result;
     }
+
+    public static void main(String[] args) {
+        Customer customer = new Customer("Pancho");
+        customer.addRental(new Rental(new Movie("Avenger", 1),4 ));
+        System.out.println(customer.statement());
+    }
 }

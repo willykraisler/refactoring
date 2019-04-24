@@ -64,8 +64,8 @@ public class Customer {
     any method in the class can get at the information. That helps a lot in coming up with cleaner
     code for the class.*/
 
-    //1. What is the best place to do a rental calculation
-    //2. Is thisAmount redundant after above change?
+    //TODO 1. What is the best place to do a rental calculation
+    // 2. Is thisAmount redundant after above change?
     private double amountFor(Rental arental) {
         double thisAmount = 0;
         switch (arental.getMovie().getPriceCode()) {
@@ -84,5 +84,11 @@ public class Customer {
                 break;
         }
         return thisAmount;
+    }
+
+    public static void main(String[] args) {
+        Customer customer = new Customer("Pancho");
+        customer.addRental(new Rental(new Movie("Avenger", 1),4 ));
+        System.out.println(customer.statement());
     }
 }
